@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Cart Page</h1>
+    <div id="container"></div>
+</body>
+</html>
+<script >
+    var arrdata = JSON.parse(localStorage.getItem("arr"));
+    console.log(arrdata);
+
+
+    function input(data){
+        document.querySelector("#container").innerHTML=""
+        arrdata.map(function(elem , index){
+        let div = document.createElement("div");
+        let img = document.createElement("img");
+        let name=document.createElement("h1");
+        let price = document.createElement("h2");
+        price.textContent=Math.floor(Math.random()*(500-100)+100) +"/-";
+        let button= document.createElement("button");
+        button.textContent ="Remove Item";
+
+
+        let button1= document.createElement("button");
+        button1.textContent ="Remove Item";
+
+        img.src=elem.strCategoryThumb;
+        name.textContent=elem.strCategory;
+
+        div.id="menu-div";
+        div.append(img , name ,price, button);
+
+        document.querySelector("#container").append(div);
+
+        button.addEventListener("click" , function(){
+            remove(elem ,index);
+        })
+    })
+    }
+    
+    function remove(elem ,index){
+        arrdata.splice(index,1);
+        localStorage.setItem("arr" , JSON.stringify(arrdata));
+        input(arrdata);
+    }
+    
+    input(arrdata);
+
+
+
+
+    
+</script>
+    
